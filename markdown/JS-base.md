@@ -43,8 +43,6 @@ Javascript可以被嵌入到网页中的任何位置。
 
 JavaScript注释和Java相同。
 
-每一个script标签就是一个JS脚本，算一个程序。
-
 分号作为每条语句的结尾
 
 对象：`{ }`
@@ -145,7 +143,7 @@ var和let都可以声明变量，但是var存在各种缺陷：
 
 *全局*（在函数之外）声明的变量拥有*全局作用域*。
 
-一个JS文件，一个script标签内都属于一个全局作用域。一个script标签就是一个JS程序
+一个JS文件，一个script标签内都属于一个全局作用域。
 
 ```js
 var carName = "byd";
@@ -218,7 +216,7 @@ let num=10
 const PI = 3.14159265359;
 ```
 
-可以更改常量对象的属性
+可以更改常量对象的属性，因为对象和数组是引用数据类型
 
 ```js
 const car = {type:"porsche", model:"911", color:"Black"};
@@ -233,8 +231,10 @@ car.color = "White";
 const car = {type:"porsche", model:"911", color:"Black"};
 car = {type:"Volvo", model:"XC60", color:"White"};    // ERROR
 ```
-
-
+---
+> **Rules**:
+>
+> 在JS中，变量优先使用`const`，如果发现它后面是要被修改的，再改为`let`
 
 # 数据类型
 

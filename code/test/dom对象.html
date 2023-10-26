@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM树</title>
+</head>
+
+<body>
+    <div class="type1">
+        hello
+        <div>内部</div>
+    </div>
+    <div>world</div>
+    <script>
+        const object = document.querySelector('div')
+        document.write(object)
+        console.log(object.innerHTML)
+        object.innerText = '修改后'
+
+    </script>
+    <h1>test2</h1>
+    <script>
+        const objectArr = document.querySelectorAll('div')
+        console.dir(objectArr)
+        document.write(objectArr)
+        // setInterval(function () {
+        //     console.log('hello world')
+        // }, 1000)
+        const i=100
+        function fun(){
+            
+                document.write(`正在倒计时：${i}`)
+        }
+        setInterval(fun,1000)
+    </script>
+</body>
+
+</html>

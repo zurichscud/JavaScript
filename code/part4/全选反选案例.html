@@ -75,7 +75,19 @@
     </tr>
   </table>
   <script>
-
+    const cks = document.querySelectorAll('.ck');
+    const checkAll = document.querySelector('#checkAll');
+    checkAll.addEventListener('click',function () {
+      for (let i = 0; i < cks.length; i++) {
+        cks[i].checked=this.checked
+      }
+    })
+    //小复选框控制大复选框
+    for (let i = 0; i < cks.length; i++) {
+      cks[i].addEventListener('click',function () {
+        checkAll.checked=document.querySelectorAll('.ck:checked').length===cks.length
+      })
+    }
   </script>
 </body>
 

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>关闭广告</title>
+    <style>
+        .box{
+            width: 500px;
+            height: 100px;
+            background-color: rgb(165, 163, 42);
+        }
+        span{
+            font-size: xx-large;
+            color: white;
+        }
+        .close{
+            background-color: skyblue;
+            text-align: center;
+            cursor: pointer;
+            width: 100px;
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+    <span>性感荷官在线发牌！！！！！</span>
+    <div class="close">
+        关闭广告
+    </div>
+</div>
+
+    <script>
+        document.querySelector('.close').addEventListener('click',function(){
+            document.querySelector('.box').style.display='none'
+            console.log('关闭广告')
+        })
+
+    </script>
+    
+</body>
+</html>

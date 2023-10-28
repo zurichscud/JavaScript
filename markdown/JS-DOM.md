@@ -310,4 +310,193 @@ setInterval有返回值，返回值是一个定时器唯一的id数字
   clearInterval(timerId)
   ```
 
-  
+
+# 事件
+
+用户在网页点击一个按钮就是事件
+
+## 事件监听
+
+我们可以为DOM对象添加事件监听，一旦触发将调用相应的函数进行响应。添加事件监听也称为绑定事件或注册事件
+
+例如鼠标经过显示下拉菜单，点击弹出内容。
+
+### 事件监听三要素
+
+- 事件源：DOM对象
+- 事件类型：用什么方式触发事件
+- 事件调用函数：事件的具体内容
+
+```js
+DOM对象.addEventListener('事件类型',事件调用函数)
+```
+
+```js
+button.addEventListenter('click',function(){
+    alert('点击了')
+})
+```
+
+## 事件类型
+
+### 鼠标事件
+
+- `click`鼠标点击
+- `mouseenter`鼠标经过【没有冒泡】
+- `mouseleave`鼠标离开【没有冒泡】
+
+```js
+    document.querySelector('div').addEventListener('mouseenter', function () {
+        console.log('进入')
+    })
+    document.querySelector(('div')).addEventListener('mouseleave',function () {
+        console.log('鼠标离开')
+    })
+```
+
+### 焦点事件
+
+焦点指的是输入框中的光标
+
+- `focus`获得焦点
+- `blur`失去焦点
+
+```js
+document.querySelector('input').addEventListener('focus',function(){
+    console.log(获得焦点)
+})
+```
+
+###  键盘事件
+
+- `keydown`按下按键
+- `keyup`弹起按键
+
+建议使用`keyup`，因为存在用户按住不松手的情况
+
+### 文本事件
+
+适用于表单元素
+
+- `input`用户输入内容
+
+```js
+//获取用户输入的内容
+input.addEventListener('input',function(){
+    console.log(input.value)
+})
+```
+
+
+
+## 事件调用函数
+
+当我们为某个DOM对象添加了某个类型的对象后
+
+```js
+button.addEventListenter('click',function(){
+    alert('点击了')
+})
+```
+
+此时该DOM对象中就成功添加了一个事件调用函数。该代码相当于
+
+```js
+click=function(){
+    alert('点击了')
+}
+```
+
+我们可以使用事件类型去调用该事件
+
+```js
+button.click()
+```
+
+## 事件对象
+
+事件对象存储了事件触发时的相关信息
+
+例如鼠标点击事件（`click`）中，事件对象中存储了鼠标点在哪个位置等信息
+
+用户输入（`input`）时，事件对象中存储了按下了哪些按键
+
+- 创建事件对象：函数的第一个参数就是事件对象
+
+```js
+DOM对象.addEventListener('事件类型',function(事件对象){
+    
+})
+```
+
+事件对象常使用*e*，*event*命名
+
+```js
+  text.addEventListener('input',function (e) {
+	console.log(e)
+  })
+```
+
+## 事件对象属性
+
+以下为事件对象中的常用成员
+
+- `type` 当前事件的类型
+- `clientX`/`clientY`光标相对于浏览器窗口左上的位置
+- `offsetX`/`offsetY`光标相对于当前DOM元素左上角的位置
+- `key`用户按下的键盘的value
+
+# 环境对象
+
+环境对象指的是函数内部特殊的变量`this`，他代表当前函数运行时所处的环境
+
+每个函数中都存在this，`this`指向了函数的调用者
+
+```js
+function fun(){
+    console.log(this)//window{...}，window对象
+}
+fun()
+```
+
+```js
+  text.addEventListener('input',function (e) {
+	console.log(this) //<textarea id="tx" placeholder="发一条友善的评论" rows="2" maxlength="200"></textarea>，DOM对象
+  })
+```
+
+- 在事件触发的函数中，`this`指向了事件源
+- 普通函数则指向了`window`
+- 箭头函数没有this
+
+> **应用场景**：
+>
+> this代表了本DOM对象，就不再需要使用querySelector获取了
+>
+> ```js
+>   document.querySelector('#tx').addEventListener('input',function (e) {
+>     let num=this.value.length
+>     total.innerHTML=`${num}/200字`
+>   })
+> ```
+>
+> 
+
+
+
+# 回调函数
+
+回调函数的字面意思为，等待时机成熟，**返回调用的函数**
+
+如果将函数A作为参数传递给函数B，则称函数A这个函数**参数**称为回调函数
+
+例如在定时器中`fun`就是一个回调函数
+
+```js
+function fun(){
+    console.log('hello')
+}
+setInterval(fun,1000)
+```
+
+事件监听中，事件调用函数也是回调函数

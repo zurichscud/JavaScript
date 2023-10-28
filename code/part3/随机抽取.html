@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>随机抽取</title>
+</head>
+
+<body>
+    <div>
+        <h1>随机问题</h1>
+        <p>显示内容区域</p>
+        <br>
+        <button id="start">开始</button>
+        <button id="end">结束</button>
+
+    </div>
+    <script>
+        const data = ['北京大学', '天津大学', '南京大学', '东北大学', '清华大学']
+        const start = document.querySelector('#start')
+        const end = document.querySelector('#end')
+        let timerId
+        let random
+        start.addEventListener('click', function () {
+            timerId = setInterval(function () {
+                random = parseInt(Math.random() * data.length)
+
+                    document.querySelector('div p').innerHTML = data[random]
+     
+            }, 60)
+            if (data.length === 1) {
+                start.disabled = true
+                end.disabled = true
+            } else {
+                start.disabled = true
+                end.disabled = false
+            }
+
+        })
+        end.addEventListener('click', function () {
+            clearInterval(timerId)
+            data.splice(random, 1)
+            end.disabled = true
+            start.disabled = false
+
+        })
+
+
+    </script>
+
+
+
+</body>
+
+</html>

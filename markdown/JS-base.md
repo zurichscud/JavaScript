@@ -314,11 +314,11 @@ document.write(`
 
 ## boolean
 
-true/false
+布尔类型只有两个值：true/false
 
-undefined、null、NaN可以理解为false，但并不相等
+`undefined`、`null`、`NaN`、`‘’`可以理解为`false`，但并不相等
 
-NaN与任何值都不相等，包括其本身
+`NaN`与任何值都不相等，包括其本身
 
 ```js
 null==false//false

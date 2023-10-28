@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .father {
+            background-color: #00aeec;
+        }
+
+        .son {
+            background-color: #e1251b;
+            width: 100px;
+        }
+    </style>
+</head>
+
+<body>
+<div class="father">
+    大盒子
+    <div class="son">小盒子</div>
+</div>
+<script>
+    document.querySelector('.father').addEventListener('click',function () {
+        alert('father')
+    },true)
+    document.querySelector('.son').addEventListener('click',function () {
+        alert('son')
+    },true)
+
+</script>
+<ul>
+    <li>哈哈哈</li>
+    <li>哈哈哈</li>
+    <li>哈哈哈</li>
+    <li>哈哈哈</li>
+    <li>哈哈哈</li>
+    <p>我不需要事件绑定</p>
+</ul>
+<script>
+    document.querySelector('ul').addEventListener('click',function (e) {
+
+        if (e.target.tagName==='LI') {
+            e.target.style.color = 'blue'
+        }
+    })
+</script>
+</body>
+</html>

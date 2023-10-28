@@ -140,3 +140,85 @@ DOM对象存在属性`tagName`表示当前HTML的标签名，value为全大写�
     })
 ```
 
+# 其他事件
+
+## 页面加载事件
+
+JS事件的执行需要该DOM资源已被加载，因此不能将JS写在DOM资源之前
+
+HTML页面往往需要加载图片资源、外联CSS，JavaScript等。我们需要让所有资源都加载完毕后再触发事件
+
+如果将JS代码写在事件源之前，JS将无法获取该DOM对象
+
+- `load`事件
+
+load译为等待，等待页面所有资源加载完毕，`load`事件被触发
+
+```js
+//等待页面所有资源加载完毕，就会执行回调函数
+window.addEventListener('load',function(){
+ //函数体
+})
+```
+
+JS写在HTML页面最后就不需要使用该方法了
+
+但是有时候资源的加载缓慢是必然的
+
+```js
+img.addEventListener('load',function(){})
+```
+
+- `DOMContentLoaded`事件类型
+
+  初始HTML文档被完全加载和解析之后，`DOMContentLoaded`事件被触发，而无需等待CSS、图像资源完全加载
+
+  ```js
+  document.addEventListenter('DOMContentLoaded',function(){
+      //函数体
+  })
+  ```
+
+## 页面滚动事件
+
+网页检测到用户移动滚动条后触发页面滚动事件，例如返回顶部，固定导航栏
+
+事件名：`scroll`
+
+```js
+window.addEventListenter('scroll',function(){
+    	console.log(this.scrollY)
+})
+```
+
+<img src="assets/image-20231028165625948.png" alt="image-20231028165625948" style="zoom:33%;" />
+
+div也可以有滚动条
+
+![image-20231028181604541](assets/image-20231028181604541.png)
+
+获取HTML根标签：`document.documentElement`
+
+```js
+window.addEventListenter('scroll',function(){
+    	console.log(document.documentElement.scrollY)
+})
+```
+
+## 页面尺寸事件
+
+- `resize`
+
+  在窗口尺寸改变时触发事件
+
+  ```js
+  window.addEventListenter('resize',function(){
+      //函数体
+  })
+  ```
+
+`clientWidth`和`clientHeight`获得元素的可见宽高（不包含border、padding）
+
+`offsetWidth`和`offsetHeight`获得元素的可见宽高（包含border、padding）
+
+`offsetLeft`和`offsetTop`元素的位置

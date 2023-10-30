@@ -69,15 +69,15 @@
 <body>
   <div class="countdown">
     <p class="next">今天是2222年2月22日</p>
-    <p class="title">下班倒计时</p>
+    <p class="title">明日倒计时</p>
     <p class="clock">
       <span id="hour">00</span>
       <i>:</i>
       <span id="minutes">25</span>
       <i>:</i>
-      <span id="scond">20</span>
+      <span id="second">20</span>
     </p>
-    <p class="tips">18:30:00下课</p>
+    <p class="tips">10月30日</p>
   </div>
   <script>
     // 随机颜色函数
@@ -104,45 +104,40 @@
         let b = Math.floor(Math.random() * 256)  // 255
         return `rgb(${r},${g},${b})`
       }
+    }
+    //倒计时效果
+    function getTime() {
+      const now=+new Date()/1000
+      const target=+ new Date('2023/10/30 00:00:00')/1000
+      //渲染当前日期
+      const date=new Date()
+      document.querySelector('.next').innerHTML=`今天是${date.getFullYear()}年${date.getMonth()+1}月${date.getDate()}日`
+
+
+      //倒计时
+      const displayTime=target-now
+      let h=parseInt(displayTime/60/60%24)
+      let m=parseInt(displayTime/60%60)
+      let s=parseInt(displayTime%60)
+
+      //补0
+      h=h<10?'0'+h:h
+      m=m<10?'0'+m:m
+      s=s<10?'0'+s:s
+
+      //渲染
+      document.querySelector('#hour').innerHTML=h
+      document.querySelector('#minutes').innerHTML=m
+      document.querySelector('#second').innerHTML=s
 
     }
+    getTime()
+    //随机渲染颜色
+    document.querySelector('.countdown').style.backgroundColor= getRandomColor(false)
+    setInterval(getTime,1000)
 
-    // 页面刷新随机得到颜色
-    const countdown = document.querySelector('.countdown')
-    countdown.style.backgroundColor = getRandomColor()
-    // 函数封装 getCountTime
-    function getCountTime() {
-      // 1. 得到当前的时间戳
-      const now = +new Date()
-      // 2. 得到将来的时间戳
-      const last = +new Date('2022-4-1 18:30:00')
-      // console.log(now, last)
-      // 3. 得到剩余的时间戳 count  记得转换为 秒数
-      const count = (last - now) / 1000
-      // console.log(count)
-      // 4. 转换为时分秒
-      // h = parseInt(总秒数 / 60 / 60 % 24)   //   计算小时
-      // m = parseInt(总秒数 / 60 % 60);     //   计算分数
-      // s = parseInt(总秒数 % 60);   
-      // let d = parseInt(count / 60 / 60 / 24)               //   计算当前秒数
-      let h = parseInt(count / 60 / 60 % 24)
-      h = h < 10 ? '0' + h : h
-      let m = parseInt(count / 60 % 60)
-      m = m < 10 ? '0' + m : m
-      let s = parseInt(count % 60)
-      s = s < 10 ? '0' + s : s
-      console.log(h, m, s)
 
-      //  5. 把时分秒写到对应的盒子里面
-      document.querySelector('#hour').innerHTML = h
-      document.querySelector('#minutes').innerHTML = m
-      document.querySelector('#scond').innerHTML = s
-    }
-    // 先调用一次
-    getCountTime()
 
-    // 开启定时器
-    setInterval(getCountTime, 1000)
   </script>
 </body>
 

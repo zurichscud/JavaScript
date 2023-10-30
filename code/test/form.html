@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<!--<form class="info" autocomplete="off">-->
+<!--    姓名：<input type="text" class="uname" name="uname" />-->
+<form autocomplete="off">
+    <input type="text" name="username">
+    <input type="submit" value="submit2">
+</form>
+<script>
+    document.querySelector('form').addEventListener('submit', function () {
+        const obj = {
+            name: 'lai',
+            age: 12,
+            address: 'XMN'
+        }
+        localStorage.setItem('obj',JSON.stringify(obj) )
+
+    })
+</script>
+
+</body>
+</html>

@@ -20,7 +20,8 @@
         object.innerText = '修改后'
 
     </script>
-    <h1>test2</h1>
+    <h1>现在时间：</h1>
+    <p id="timer">2023年10月29日 10:08</p>
     <script>
         const objectArr = document.querySelectorAll('div')
         console.dir(objectArr)
@@ -28,12 +29,16 @@
         // setInterval(function () {
         //     console.log('hello world')
         // }, 1000)
-        const i=100
-        function fun(){
-            
-                document.write(`正在倒计时：${i}`)
+        function getTime() {
+            const date=new Date()
+
+            return `${date.getFullYear()}年${date.getMonth()+1}月${date.getDate()}日 ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
         }
-        setInterval(fun,1000)
+        setInterval(function () {
+            document.querySelector('#timer').innerHTML=getTime()
+        },1000)
+
+
 
     </script>
 </body>

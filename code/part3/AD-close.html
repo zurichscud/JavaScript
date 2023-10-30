@@ -32,11 +32,19 @@
 
     <script>
         document.querySelector('.close').addEventListener('click',function(){
-            document.querySelector('.box').style.display='none'
+            // document.querySelector('.box').style.display='none'
+            this.parentNode.style.display='none'
             console.log('关闭广告')
-        })
 
-    </script>
+        })
+        const adlist = document.querySelectorAll('.box');
+        for (let i = 0; i < adlist.length; i++) {
+            adlist[i].addEventListener('click',function () {
+                this.parentNode.style.display='none'
+            })
+        }
+
+</script>
     
 </body>
 </html>

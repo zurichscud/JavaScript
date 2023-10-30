@@ -1,10 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>支付成功</title>
 </head>
 <body>
-$END$
+<a href="https://www.baidu.com">支付成功<span id="seconds">5</span>秒后自动跳转回首页</a>
+<script>
+    //定义倒计时时间
+    let i = 5
+
+    setInterval(function () {
+        i--
+        document.querySelector('#seconds').innerHTML = i
+        if (i === 0) location.href = document.querySelector('a').href
+
+    }, 1000)
+
+</script>
 </body>
 </html>

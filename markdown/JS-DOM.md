@@ -200,12 +200,24 @@ document.body
 对象.classList.toggle('类名')//切换类
 ```
 
-`toggle`的作用是如果HTML标签中如果存在该类名就删除，如果不存在该类名则追加
+`toggle`，中文译为切换。toggle的作用是如果HTML标签中如果存在该类名就删除，如果不存在该类名则追加
+
+广泛应用于点击切换勾选图标
 
 ```js
 //class='box active'
 dom.classList.toggle('box')//class ='active'
 ```
+
+- `contains`包含
+
+  判断classList是否包含该类名，返回值为Boolean值
+
+```js
+classList.contains('类名')
+```
+
+
 
 ## Form
 

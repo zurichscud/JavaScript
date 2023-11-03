@@ -215,7 +215,12 @@
             flag = true
         }
 
-        field.addEventListener('change', innerVerify)
+        field.addEventListener('change', innerVerify)//根据用户需要选择input或change
+        // innerVerify()
+        document.querySelector('form').addEventListener('submit',function (e) {
+            innerVerify()
+            if (!flag) e.preventDefault()
+        })
         return flag
 
     }
@@ -259,16 +264,23 @@
     function verifyPwd2() {
         const check = document.querySelector('input[name=confirm]')
         let checkFlag = false
-        check.addEventListener('change', function () {
-            if (check.value === document.querySelector('input[name=password]').value) {
+        function  innerVerify() {
+            if (check.value === document.querySelector('input[name=password]').value&&check.value!=='') {
                 checkFlag = true
                 check.nextElementSibling.innerHTML = ''
             } else {
                 check.nextElementSibling.innerHTML = '密码不匹配'
                 checkFlag = false
             }
+        }
+        check.addEventListener('change',innerVerify )
+        document.querySelector('form').addEventListener('submit',function (e) {
+            innerVerify()
+            console.log(checkFlag)
+            if (!checkFlag) e.preventDefault()
         })
         return checkFlag
+
     }
 
     verifyPwd2()
@@ -314,12 +326,6 @@
             e.preventDefault()
             return alert('请勾选已阅读并同意用户协议')
         }
-        if (!verifyName()) console.log(verifyName())
-        if (!verifyPhone()) e.preventDefault()
-        if (!verifyPwd()) e.preventDefault()
-        if (!verifyPwd2()) e.preventDefault()
-        if (!verifyCode()) e.preventDefault()
-
 
     })
 

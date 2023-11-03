@@ -24,6 +24,12 @@ button.addEventListenter('click',function(){
 })
 ```
 
+### 事件源的选择
+
+<img src="assets/image-20231031180047374.png" alt="image-20231031180047374" style="zoom:50%;" />
+
+如果子元素之间存在重叠，绑定某个子元素很容易出现错误，例如内部div和img存在重叠部分，当鼠标移动至重叠部分，会触发令人想不到的意外事件。
+
 ## 事件类型
 
 ### 鼠标事件
@@ -31,6 +37,8 @@ button.addEventListenter('click',function(){
 - `click`鼠标点击
 - `mouseenter`鼠标经过【没有冒泡】
 - `mouseleave`鼠标离开【没有冒泡】
+- mouseover【有冒泡】
+- mousemove鼠标移动
 
 ```js
     document.querySelector('div').addEventListener('mouseenter', function () {
@@ -241,7 +249,7 @@ setInterval(fun,1000)
 
 ## 阻止事件传播
 
-使用事件对象的方法阻止捕获或冒泡，stopPropagation译为阻止传播
+使用事件对象的方法阻止捕获或冒泡，`stopPropagation`译为阻止传播
 
 ```js
     document.querySelector('.son').addEventListener('click',function (e) {
@@ -273,7 +281,7 @@ button.removeEventListener('click',fun)
 
 多个相同元素（例如`li`元素）需要进行事件绑定，我们可以使用for循环进行遍历
 
-我们使用事件委托可以只要事件绑定一次，减少注册次数
+我们使用事件委托可以只要事件绑定一次，减少事件注册次数
 
 > 每个DOM元素的事件是客观存在的，默认值为null，当我们对DOM元素进行事件绑定，实际上就是对已存在的事件变量赋值
 

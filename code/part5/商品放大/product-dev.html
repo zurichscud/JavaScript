@@ -432,20 +432,20 @@
     // 显示函数 显示大盒子
     function show() {
       // 先清除定时器
-      clearTimeout(timeId)
       large.style.display = 'block'
+      clearTimeout(timeId)
     }
     // 隐藏函数 隐藏大盒子
     function hide() {
+      large.style.display = 'none'
       timeId = setTimeout(function () {
-        large.style.display = 'none'
       }, 200)
     }
 
 
     // 4. 鼠标经过大盒子， 显示隐藏 大盒子
-    large.addEventListener('mouseenter', show)
-    large.addEventListener('mouseleave', hide)
+    // large.addEventListener('mouseenter', show)
+    // large.addEventListener('mouseleave', hide)
 
 
     // 5. 鼠标经过中等盒子，显示隐藏 黑色遮罩层

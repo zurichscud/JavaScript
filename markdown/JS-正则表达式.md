@@ -23,7 +23,7 @@ reg.test(str)
 
 - `exec`
 
-  查找符合正则表达式规则的字符串，返回值为数组，没有找到返回null
+  每次查找符合正则表达式规则的字符串，返回值为数组，没有找到返回null
 
 ```js
 /hello/.exec('hello world')

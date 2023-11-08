@@ -16,7 +16,7 @@ let arr=[1,'pink',undefined,{name:'张三',age:12 },[1,2,3]]
 
 ## API
 
-- length 长度
+- `length` 长度
 
 - `push`增加内容
 
@@ -109,6 +109,8 @@ let person={
 
 ## 对象方法
 
+### Before ES6
+
 对象中的成员方法由`函数名:匿名函数`构成。成员方法与其他成员需要有逗号分隔
 
 ```js
@@ -126,13 +128,34 @@ let person={
 person.sayhi()
 ```
 
-JS中的对象的方法可以进行更改(较少使用)：
+JS中的对象的方法可以进行更改：
 
 ```js
 person.sayhi()=function(){
    document.write('hello')
 }
 ```
+
+### ES6
+
+ES6中新增一种更加简约的向对象中添加方法的方式：
+
+`函数名(){}`
+
+```js
+var person = {
+    firstName: "John",
+    lastName: "Doe",
+    sayHello() {
+        console.log(`Hello, my name is ${this.firstName} ${this.lastName}`);
+    }
+};
+
+person.sayHello(); // 输出 "Hello, my name is John Doe"
+
+```
+
+
 
 ## 对象成员的增加
 

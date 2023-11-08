@@ -303,123 +303,6 @@ function fun(callback)
 
 例如`setTimeout(callback,time)`，在该函数内部会在time时间后自动调用回调函数
 
-# 构造函数
-
-## 构造函数的引入
-
-在Java中 我们可以设计一个类，根据类中的构造函数创建一个对象。但是在JS中没有类的概念，要如何像JAVA一样创建一个对象呢？
-
-虽然我们可以直接使用对象字面量创建对象，但是这并不具有复用性，为此JS借鉴了JAVA的构造方法：
-
-我们可以定义一个函数作为某个对象的构造函数。调用构造函数之后将会得到一个符合我们预期的对象 
-
-## new
-
-创建构造函数，很简单，我们只需要声明一个函数即可
-
-```js
-function fun(){
-    //your code
-}
-```
-
-现在该函数还是一个普通函数，但是我们使用new关键字调用它时，我们将会得到一个对象
-
-```js
-let obj =new fun()
-```
-
-JS执行new时会在构造函数中执行以下代码：
-
-```js
-function fun(){
-    this={}//创建一个空对象
-    //your code
-    return this//返回一个对象
-}
-```
-
-为此你只需要在构造函数中使用this关键字便可以创建属于你自己的对象
-
-为了让开发者知道fun()是构造函数，常在声明构造函数时将方法的首字母**大写**。表示该方法是一个构造函数，需要使用new关键字调用
-
-```js
-function User(name,age){
-    this.name=name
-    this.age=age
-}
-const user = new User('lai',23);
-```
-
-## 类比class
-
-JS的构造函数就相当于Java中的类，使用this添加的成员为public访问权限，使用let声明的变量就当有是`private`私有变量，外界无法无法访问。但是我们可以添加getter和setter方法间接访问（闭包）
-
-```js
-function User() {
-    let _age=0//私有化变量，不允许外部直接调用
-    this.getAge=function () {
-        return _age
-    }
-    this.setAge=function (age) {
-        if(age>0) _age=age
-    }
-}
-const user=new User()
-user.setAge(12)
-console.log(user.getAge());
-```
-
-
-
-# 闭包函数
-
-## 闭包
-
-闭包*Closure*：在内层函数中使用到了外层函数的变量。
-
-我们可以在函数中嵌套声明一个函数
-
-```js
-function fun1(){
-    let x=1
-    function fun2(){
-        console.log(x)
-    }
-    fun2()
-}
-fun1()
-```
-
-**内部函数+内部函数使用外部变量便可以生成闭包**
-
-## 闭包的应用
-
-闭包的作用在于外部可以访问到内部的变量
-
-<img src="assets/image-20231103114032623.png" alt="image-20231103114032623" style="zoom:50%;" />
-
-当我们在fun中return fun2时，外部就可以访问变量x了
-
-```js
-function User() {
-    let _age=0//私有化变量，不允许外部直接调用
-    this.getAge=function () {
-        return _age
-    }
-    this.setAge=function (age) {
-        if(age>0) _age=age
-    }
-}
-const user=new User()
-user.setAge(12)
-console.log(user.getAge());
-```
-
-闭包就是解决我们访问函数内部变量我问题。
-
-
-
 # 箭头函数
 
 箭头函数是ES6新增的语法
@@ -473,7 +356,12 @@ const fun= ( )=>{
   //return x+x
   ```
 
-  
+
+- 当返回的是一个对象时，需要使用括号包起
+
+```js
+const res=uname=>({name:uname})
+```
 
 
 

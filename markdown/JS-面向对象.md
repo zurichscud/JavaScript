@@ -1,26 +1,3 @@
-# 深入对象
-
-## 创建对象的方式
-
-- 对象字面量
-
-本质上是
-
-```js
-new Object(对象字面量)
-```
-
-- new Object
-
-```js
-//创建了一个空对象
-const obj=new Object()
-//追加元素
-obj.name='lai'
-```
-
-- 构造函数
-
 # 构造函数
 
 ## 构造函数的引入
@@ -274,7 +251,6 @@ console.log(Pig.count)//12
 ### 内置静态成员
 
 - name 对象名
-- 
 
-# API
+
 

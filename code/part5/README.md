@@ -48,3 +48,4 @@ getBoundClientRect()是相当于浏览器视窗的距离，因此y还需要减�
 - 背景图片移动
 backgroundPositionX、backgroundPositionY
 `background.size=800*800`
+# demo

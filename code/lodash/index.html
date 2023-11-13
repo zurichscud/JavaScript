@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<button>点击我</button>
+<script src="lodash.min.js"></script>
+<!--<script src="https://cdn.bootcss.com/lodash.js/4.17.15/lodash.core.min.js"></script>-->
+<script>
+    function f() {
+        console.log('哈哈哈')
+    }
+    document.querySelector('button').addEventListener('click',_.debounce(f,1000))
+
+</script>
+</body>
+</html>

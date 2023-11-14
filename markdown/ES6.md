@@ -14,6 +14,30 @@
 
 子作用域能够访问父作用域，父级作用域无法访问子级作用域
 
+```js
+function f2(callback) {
+    setTimeout(()=>{
+        console.log('炖老母鸡')
+        callback()
+    },2000)
+}
+```
+
+箭头函数查找callback->setTimeout->f2
+
+```js
+function f2(callback) {
+    setTimeout((callback)=>{
+        console.log('炖老母鸡')
+        callback()
+    },2000)
+}
+```
+
+根据作用域链callback将会使用箭头函数内的callback，但是在setTimeout中并没有传入实参，因此callback=undefined
+
+
+
 ## JS垃圾回收机制(GC)
 
 ![image-20231106152052973](assets/image-20231106152052973.png)

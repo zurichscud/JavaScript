@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<button>点击获得学生信息</button>
+
+</body>
+<script>
+    document.querySelector('button').addEventListener('click',() =>{
+        console.log('点击了')
+        ! async function (){
+            const result=await fetch('http://localhost:8080/student',{
+                method:'GET',
+            })
+                .then((res) => {
+                    if (res.status === 200) {
+                        return res.json()//将json->JS对象
+                    }
+                    else throw new Error('请求错误')
+                })
+                .catch((err) => {
+                    console.log(err)
+                })
+            console.log(result)
+        }()
+
+    })
+
+</script>
+</html>

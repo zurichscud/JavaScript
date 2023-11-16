@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<div id="root">
+    <h1 id="info">请登录</h1>
+    <form>
+        <input id="username" type="text"> <br>
+        <input id="password" type="password">
+        <button> 登录</button>
+    </form>
+</div>
+
+
+<script>
+    function f2() {
+        ! async function (){
+            //附加token信息
+            const token=localStorage.getItem('token')
+            const result=await fetch('http://localhost:8080/student',{
+                method:'GET',
+                headers:{
+                    'authorization':`Bearer ${token}`
+                }
+            })
+                .then((res) => {
+                    if (res.status === 200) {
+                        return res.json()//将json->JS对象
+                    }
+                    else throw new Error('请求错误')
+                })
+                .catch((err) => {
+                    console.log(err)
+                })
+            console.log(result)
+        }()
+        //获取信息的逻辑
+    }
+    if (localStorage.getItem('token')){
+        document.querySelector('#root').innerHTML=`
+                <h1>你好，${localStorage.getItem('username')} </h1>
+                <button onclick="f2() ">获取信息</button>
+                `
+    }
+    else
+    {
+        document.querySelector('button').addEventListener('click', (e) => {
+            e.preventDefault()
+            const username = document.querySelector('#username').value.trim()
+            const password = document.querySelector('#password').value.trim()
+            // console.log(username,password)
+            fetch('http://localhost:8080/login', {
+                method: 'post',
+                headers: {
+                    'Content-type': 'application/json'
+                },
+                body: JSON.stringify({username, password})
+            }).then((res) =>
+                {
+                    if (res.status===200)
+                        return res.json()//不能添加{}，否则不能省略return
+                    else throw new Error('错误')
+                }
+            )
+                .then((res) => {
+                    document.querySelector('#root').innerHTML=`
+                <h1>你好，${res.data.nickname} </h1>
+                <hr>
+                <button onclick="f2() ">获取信息</button>
+                `
+                    console.log(res)
+                    localStorage.setItem('token',res.data.token)
+
+
+                })
+                .catch((err) => {
+                    // console.log(err)
+                    document.querySelector('#info').innerHTML=`${err.message}`
+                })
+
+
+        })
+    }
+</script>
+</body>
+</html>

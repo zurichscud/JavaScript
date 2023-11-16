@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+<button id="btn">登录</button>
+<button id="btn2">student</button>
+<script>
+    axios.defaults.baseURL = 'http://localhost:8080'
+    document.querySelector('#btn').addEventListener('click', async () => {
+        try {
+            const res = await axios({
+                url: '/login',
+                method: 'post',
+                data: {
+                    username: 'admin',
+                    password: '123456'
+                }
+
+            })
+            localStorage.setItem('token', res.data.data.token)
+        } catch (e) {
+            console.log('请求出错')
+        }
+    })
+    //获取学生信息
+    document.querySelector('#btn2').addEventListener('click', async () => {
+        try {
+            const res = await axios({
+                method: 'get',
+                url: '/student',
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                }
+            })
+            console.log(res.data)
+        } catch (e) {
+            console.log(e.message)
+        }
+    })
+
+</script>
+
+
+</body>
+</html>

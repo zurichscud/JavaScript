@@ -367,6 +367,8 @@ Promise的状态，用于描述PromiseResult中的数据的状态
 
 通常会将catch写在调用链的最后
 
+# Promise API
+
 ## Promise.all
 
 ```js
@@ -426,3 +428,110 @@ any得到的promise只要`fulfilled`状态的（rejected状态的promise对象�
 ```
 
 > 3
+
+
+
+# async
+
+`async/await` 是一种更现代、清晰的异步编程方式，可以使异步代码看起来更像同步代码
+
+## async
+
+`async`，译为异步的。
+
+`async`用于帮助我们快速创建返回类型为Promise对象的函数，即异步函数。
+
+```js
+async function 函数名(){}
+```
+
+- 如果没有写return，async会返回一个空的Promise对象
+- return value，sync会将该value封装至Promise对象中
+
+```js
+async function f() {
+    return 1
+}
+f().then((a) =>{console.log(a)})
+```
+
+等价于下面的写法：
+
+```js
+function f() {
+    return Promise.resolve(1)
+}
+f().then((a) =>{console.log(a)})
+```
+
+- 显式return promise对象，常搭配Promise的构造函数
+
+```js
+async function f() {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve('炖老母鸡');
+    }, 1000);
+  });
+}
+```
+
+## await
+
+在**async函数**中，可以使用 `await` 来等待并获取异步的结果，而不必使用回调函数。
+
+awit 会暂停代码的执行，得到异步结果后才会继续执行下面的代码
+
+```js
+Promise中的value=await promise对象
+Promise中的value=await 异步函数(async)
+```
+
+他的本质还是使用then获取异步结果
+
+```js
+promise对象.then(callback)
+```
+
+```js
+! async function(){
+    const res=await f()
+    console.log(res)
+    console.log('吃老母鸡')
+}()
+```
+
+> 为保证同步函数能够正常执行，不会被阻塞，await只能用在async声明的异步函数中，await会阻塞其后面的代码的执行。
+>
+> 在异步函数await后的代码肯定是需要前面的异步结果才能够继续执行的，因此将其放在了await后面。如果与异步结果无关，可以将代码写在await之前，防止其被await阻塞
+
+
+
+> *Grammer*：
+>
+> 当`await`后面修饰的不是`promise`对象，会首先执行该同步语句，再执行`await Promise.resolve(undefined)`
+>
+> await后面的语句的执行逻辑：
+>
+> 当promise的状态为`fulfilled`时会将后面的语句放入微任务队列中
+>
+> 【即使用了`await`得到的`promise.then(后面的语句)`】
+>
+> ```js
+> async function f2() {
+>     console.log(1)
+>     await console.log(2)
+>     console.log(3)
+> }
+> f2()
+> console.log(4)
+> ```
+>
+> > 1243
+>
+> <img src="assets/image-20231115124812847.png" alt="image-20231115124812847" style="zoom:33%;" />
+
+## try -catch
+
+`async`和`awit`使得异步编程与同步编程相似，因此我们可以使用try-catch对其进行异常处理
+
